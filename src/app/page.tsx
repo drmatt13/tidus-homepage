@@ -136,7 +136,7 @@ export default function Home() {
             rows[3].map((item, index) => (
               <div
                 key={item.url}
-                className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
+                className="flex-1 flex justify-center items-center animate-fade-in opacity-0 /animate-wiggle-fast"
                 style={{ animationDelay: `${index * 25 + 525}ms` }}
               >
                 <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">

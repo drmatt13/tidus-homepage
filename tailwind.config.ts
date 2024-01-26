@@ -12,7 +12,7 @@ module.exports = {
         "spin-slow": "spin 5s linear infinite",
         "wiggle-slow": "wiggle 2s linear infinite",
         wiggle: "wiggle 1s linear infinite",
-        "wiggle-fast": "wiggle .5s linear infinite",
+        "wiggle-fast": "wiggle .5s linear",
         float: "float 3s ease-in-out infinite",
       },
       colors: {
@@ -39,8 +39,10 @@ module.exports = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         wiggle: {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
+          "0%, 100%": { transform: "rotate(-2deg)" },
+          "25%": { transform: "rotate(2deg)" },
+          "50%": { transform: "rotate(-2deg)" },
+          "75%": { transform: "rotate(2deg)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },

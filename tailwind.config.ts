@@ -7,12 +7,13 @@ module.exports = {
       animation: {
         "cart-bounce": "cart-bounce 7s linear infinite",
         "fade-in-slow": "fade-in .75s ease-in forwards",
-        "fade-in": "fade-in .6s ease-out forwards",
+        "fade-in": "fade-in .4s ease-out forwards",
         "fade-in-fast": "fade-in .1s ease-in forwards",
         "spin-slow": "spin 5s linear infinite",
         "wiggle-slow": "wiggle 2s linear infinite",
         wiggle: "wiggle 1s linear infinite",
         "wiggle-fast": "wiggle .5s linear infinite",
+        float: "float 3s ease-in-out infinite",
       },
       colors: {
         "light-primary": "var(--color-light-primary)",
@@ -33,13 +34,17 @@ module.exports = {
           "92.5%, 97.5%": { transform: "translate(0.5rem, -0.65625rem)" },
         },
         "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(2.5rem)" },
-          "50%": { opacity: "0", transform: "translateY(2.5rem)" },
+          "0%": { opacity: "0", transform: "translateY(3rem)" },
+          // "50%": { opacity: "0.5", transform: "translateY(1.5rem)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         wiggle: {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-0.5rem)" },
         },
       },
     },

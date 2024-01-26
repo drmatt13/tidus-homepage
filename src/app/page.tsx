@@ -9,6 +9,10 @@ function selectRandomIndexFromList(list: Array<any>) {
   return Math.floor(Math.random() * list.length);
 }
 
+function generateRandomInteger(min: number, max: number) {
+  return Math.floor(min + Math.random() * (max + 1 - min));
+}
+
 export default function Home() {
   const [backgroundColors, setBackgroundColors] = useState<Array<string>>([
     "#3d8dd8",
@@ -66,12 +70,14 @@ export default function Home() {
       <main className="w-screen h-screen flex flex-col justify-evenly px-32 py-16 pulsing-background">
         <div className="flex-1 w-full flex">
           {rows[0] &&
-            rows[0].map((item) => (
+            rows[0].map((item, index) => (
               <div
                 key={item.url}
-                className="flex-1 flex justify-center items-center animate-fade-in"
+                className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
+                style={{ animationDelay: `${index * 25}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer">
+                {/* delay */}
+                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
                   <Link href={item.url}>
                     <img
                       src={item.image}
@@ -80,17 +86,19 @@ export default function Home() {
                     />
                   </Link>
                 </div>
+                {/* delay */}
               </div>
             ))}
         </div>
         <div className="flex-1 w-full flex">
           {rows[1] &&
-            rows[1].map((item) => (
+            rows[1].map((item, index) => (
               <div
                 key={item.url}
-                className="flex-1 flex justify-center items-center animate-fade-in"
+                className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
+                style={{ animationDelay: `${index * 25 + 175}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer">
+                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
                   <Link href={item.url}>
                     <img
                       src={item.image}
@@ -104,12 +112,14 @@ export default function Home() {
         </div>
         <div className="flex-1 w-full flex">
           {rows[2] &&
-            rows[2].map((item) => (
+            rows[2].map((item, index) => (
               <div
                 key={item.url}
-                className="flex-1 flex justify-center items-center animate-fade-in"
+                // 350, 375, 400, 425, 450, 475, 500
+                className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
+                style={{ animationDelay: `${index * 25 + 350}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer">
+                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
                   <Link href={item.url}>
                     <img
                       src={item.image}
@@ -123,12 +133,13 @@ export default function Home() {
         </div>
         <div className="flex-1 w-full flex">
           {rows[3] &&
-            rows[3].map((item) => (
+            rows[3].map((item, index) => (
               <div
                 key={item.url}
-                className="flex-1 flex justify-center items-center animate-fade-in"
+                className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
+                style={{ animationDelay: `${index * 25 + 525}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer">
+                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
                   <Link href={item.url}>
                     <img
                       src={item.image}

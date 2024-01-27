@@ -5,6 +5,8 @@ import Image from "next/image";
 import data from "@/app/data";
 import Link from "next/link";
 
+// revalidate every 5 minutes
+
 function selectRandomIndexFromList(list: Array<any>) {
   return Math.floor(Math.random() * list.length);
 }
@@ -26,12 +28,16 @@ export default function Home() {
     "#5ac8fa",
   ]);
 
-  const [hue, setHue] = useState<number>(generateRandomInteger(0, 360));
+  const [hue, setHue] = useState<number | undefined>(undefined);
 
   const [rows, setRows] = useState<Array<typeof data>>([]);
 
   const mainRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setHue(generateRandomInteger(0, 360));
+  }, []);
 
   useEffect(() => {
     // randomize the data order
@@ -86,16 +92,18 @@ export default function Home() {
         }
       `}</style>
       {/* create video background */}
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-60 saturate-150"
-        src="/space_-_5200 (540p).mp4"
-        style={{
-          filter: `hue-rotate(${hue}deg) saturate(1.5)`,
-        }}
-      />
+      {hue && (
+        <video
+          autoPlay
+          loop
+          muted
+          className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-60 saturate-150"
+          src="/space_-_5200 (540p).mp4"
+          style={{
+            filter: `hue-rotate(${hue}deg) saturate(1.5)`,
+          }}
+        />
+      )}
       <main
         className="w-screen h-screen flex flex-col justify-evenly px-32 py-16 /pulsing-background"
         ref={mainRef}

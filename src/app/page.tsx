@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import data from "@/app/data";
 import Link from "next/link";
@@ -26,7 +26,12 @@ export default function Home() {
     "#5ac8fa",
   ]);
 
+  const [hue, setHue] = useState<number>(generateRandomInteger(0, 360));
+
   const [rows, setRows] = useState<Array<typeof data>>([]);
+
+  const mainRef = useRef<HTMLDivElement>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // randomize the data order
@@ -41,6 +46,27 @@ export default function Home() {
   }, []);
 
   const randomIndex = selectRandomIndexFromList(backgroundColors);
+
+  useEffect(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      const row = generateRandomInteger(0, 3);
+      const item = generateRandomInteger(0, 6);
+
+      console.log(row, item);
+      // select a random item from a random row and animate it
+      const element = mainRef.current?.children[row].children[item].firstChild
+        ?.firstChild as ChildNode as HTMLElement;
+      if (element) {
+        element.classList.remove("animate-bounce");
+        void element.offsetWidth;
+        element.classList.add("animate-bounce");
+      }
+      console.log(element);
+    }, 3000);
+  }, []);
 
   return (
     <>
@@ -60,14 +86,20 @@ export default function Home() {
         }
       `}</style>
       {/* create video background */}
-      {/* <video
+      <video
         autoPlay
         loop
         muted
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        src="/prism-background.mp4"
-      /> */}
-      <main className="w-screen h-screen flex flex-col justify-evenly px-32 py-16 pulsing-background">
+        className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-60 saturate-150"
+        src="/space_-_5200 (540p).mp4"
+        style={{
+          filter: `hue-rotate(${hue}deg) saturate(1.5)`,
+        }}
+      />
+      <main
+        className="w-screen h-screen flex flex-col justify-evenly px-32 py-16 /pulsing-background"
+        ref={mainRef}
+      >
         <div className="flex-1 w-full flex">
           {rows[0] &&
             rows[0].map((item, index) => (
@@ -76,17 +108,17 @@ export default function Home() {
                 className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
                 style={{ animationDelay: `${index * 25}ms` }}
               >
-                {/* delay */}
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
-                  <Link href={item.url}>
-                    <img
-                      src={item.image}
-                      alt="Picture of the author"
-                      className="object-cover w-full h-full rounded-lg"
-                    />
-                  </Link>
+                <div className="aspect-square w-[85%] max-h-[80%] transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
+                  <div className="h-full w-full rounded-lg shadow-lg transition-all hover:shadow-xl shadow-black/40 hover:shadow-black/50">
+                    <Link href={item.url}>
+                      <img
+                        src={item.image}
+                        alt={"item"}
+                        className="object-cover w-full h-full rounded-lg"
+                      />
+                    </Link>
+                  </div>
                 </div>
-                {/* delay */}
               </div>
             ))}
         </div>
@@ -98,14 +130,16 @@ export default function Home() {
                 className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
                 style={{ animationDelay: `${index * 25 + 175}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
-                  <Link href={item.url}>
-                    <img
-                      src={item.image}
-                      alt="Picture of the author"
-                      className="object-cover w-full h-full rounded-lg"
-                    />
-                  </Link>
+                <div className="aspect-square w-[85%] max-h-[80%] transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
+                  <div className="h-full w-full rounded-lg shadow-lg transition-all hover:shadow-xl shadow-black/40 hover:shadow-black/50">
+                    <Link href={item.url}>
+                      <img
+                        src={item.image}
+                        alt={item.url}
+                        className="object-cover w-full h-full rounded-lg"
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -115,18 +149,19 @@ export default function Home() {
             rows[2].map((item, index) => (
               <div
                 key={item.url}
-                // 350, 375, 400, 425, 450, 475, 500
                 className="flex-1 flex justify-center items-center animate-fade-in opacity-0"
                 style={{ animationDelay: `${index * 25 + 350}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
-                  <Link href={item.url}>
-                    <img
-                      src={item.image}
-                      alt="Picture of the author"
-                      className="object-cover w-full h-full rounded-lg"
-                    />
-                  </Link>
+                <div className="aspect-square w-[85%] max-h-[80%] transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
+                  <div className="h-full w-full rounded-lg shadow-lg transition-all hover:shadow-xl shadow-black/40 hover:shadow-black/50">
+                    <Link href={item.url}>
+                      <img
+                        src={item.image}
+                        alt={item.url}
+                        className="object-cover w-full h-full rounded-lg"
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -139,14 +174,16 @@ export default function Home() {
                 className="flex-1 flex justify-center items-center animate-fade-in opacity-0 /animate-wiggle-fast"
                 style={{ animationDelay: `${index * 25 + 525}ms` }}
               >
-                <div className="aspect-square w-[85%] max-h-[80%] rounded-lg shadow-lg hover:shadow-xl shadow-black/40 hover:shadow-black/50 transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
-                  <Link href={item.url}>
-                    <img
-                      src={item.image}
-                      alt="Picture of the author"
-                      className="object-cover w-full h-full rounded-lg"
-                    />
-                  </Link>
+                <div className="aspect-square w-[85%] max-h-[80%] transition-all hover:scale-105 hover:duration-100 hover:ease-in duration-300 ease-out hover:-translate-y-1 cursor-pointer delay-[30ms]">
+                  <div className="h-full w-full rounded-lg shadow-lg transition-all hover:shadow-xl shadow-black/40 hover:shadow-black/50">
+                    <Link href={item.url}>
+                      <img
+                        src={item.image}
+                        alt={item.url}
+                        className="object-cover w-full h-full rounded-lg"
+                      />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

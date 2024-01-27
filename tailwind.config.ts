@@ -12,8 +12,9 @@ module.exports = {
         "spin-slow": "spin 5s linear infinite",
         "wiggle-slow": "wiggle 2s linear infinite",
         wiggle: "wiggle 1s linear infinite",
-        "wiggle-fast": "wiggle .5s linear",
+        "wiggle-fast": "wiggle 1s linear",
         float: "float 3s ease-in-out infinite",
+        bounce: "bounce 1.75s linear forwards",
       },
       colors: {
         "light-primary": "var(--color-light-primary)",
@@ -29,6 +30,16 @@ module.exports = {
         "dark-border": "var(--color-dark-border)",
       },
       keyframes: {
+        bounce: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "12.5%": { transform: "translateY(-0.5rem)" },
+          "25%": { transform: "translateY(0)" },
+          "37.5%": { transform: "translateY(-0.25rem)" },
+          "50%": { transform: "translateY(0)" },
+          "62.5%": { transform: "translateY(-0.125rem)" },
+          "75%": { transform: "translateY(0)" },
+          "87.5%": { transform: "translateY(-0.0625rem)" },
+        },
         "cart-bounce": {
           "0%, 90%, 95%, 100%": { transform: "translate(0.5rem, -0.375rem)" },
           "92.5%, 97.5%": { transform: "translate(0.5rem, -0.65625rem)" },
@@ -40,9 +51,16 @@ module.exports = {
         },
         wiggle: {
           "0%, 100%": { transform: "rotate(-2deg)" },
-          "25%": { transform: "rotate(2deg)" },
-          "50%": { transform: "rotate(-2deg)" },
-          "75%": { transform: "rotate(2deg)" },
+          "10%": { transform: "rotate(2deg)" },
+          "20%": { transform: "rotate(-2deg)" },
+          "30%": { transform: "rotate(2deg)" },
+          "40%": { transform: "rotate(-2deg)" },
+          "50%": { transform: "rotate(2deg)" },
+          "60%": { transform: "rotate(-2deg)" },
+          "70%": { transform: "rotate(2deg)" },
+          "80%": { transform: "rotate(-2deg)" },
+          "90%": { transform: "rotate(2deg)" },
+          "100%": { transform: "rotate(-2deg)" },
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },

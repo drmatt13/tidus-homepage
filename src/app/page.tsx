@@ -105,7 +105,7 @@ export default function Home() {
         />
       )}
       <main
-        className="w-screen h-screen flex flex-col justify-evenly px-32 py-16 /pulsing-background"
+        className="w-screen h-screen flex flex-col justify-evenly px-32 py-16 /pulsing-background overflow-hidden"
         ref={mainRef}
       >
         <div className="flex-1 w-full flex">
